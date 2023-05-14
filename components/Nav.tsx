@@ -45,7 +45,7 @@ const Nav = () => {
                     </button>
                     <Link href="/profile">
                         <Image
-                            src="/public/assets/images/logo.svg"
+                            src="/assets/images/Emmanuel.jpg"
                             height={37}
                             width={37}
                             alt="Profile"
@@ -62,7 +62,7 @@ const Nav = () => {
                                 onClick={()=>signIn(provider.id)}
                                 className="black_btn"
                             >
-
+                                SIGN IN
                             </button>
                         ))
                     }
