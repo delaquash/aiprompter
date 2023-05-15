@@ -1,5 +1,5 @@
 "use client"
-import { signOut, signIn, getProviders, useSession } from "next-auth/react";
+import { getProviders, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -12,6 +12,7 @@ const Nav = () => {
     const isUserLoggedIn = true;
 
     const [ providers, setProviders ]= useState<IProvider>()
+    const [toggleDropDown, setToggleDropDown] = useState<boolean>(false)
     
     useEffect(()=> {
         const setProvider = async ()=> {
@@ -55,6 +56,37 @@ const Nav = () => {
             ): (
                 <>
                     {providers && 
+                        Object.values(providers).map((provider)=>(
+                            <button
+                                type="button"
+                                key={provider.name}
+                                onClick={()=>signIn(provider.id)}
+                                className="black_btn"
+                            >
+                                SIGN IN
+                            </button>
+                        ))
+                    }
+                </>
+            )}
+        </div>
+
+        {/* mobile navigation */}
+        <div className="relative flex sm:hidden">
+            {isUserLoggedIn ? (
+                <div className="flex">
+                    <Image
+                        src="/assets/images/Emmanuel.jpg"
+                        height={37}
+                        width={37}
+                        alt="Profile"
+                        className="rounded-full"
+                        onClick={()=>setToggleDropDown((prev)=>!prev)}
+                    />
+                </div>
+            ):( 
+                <>
+                     {providers && 
                         Object.values(providers).map((provider)=>(
                             <button
                                 type="button"
