@@ -83,6 +83,32 @@ const Nav = () => {
                         className="rounded-full"
                         onClick={()=>setToggleDropDown((prev)=>!prev)}
                     />
+                    {toggleDropDown && (
+                        <div className="dropdown">
+                            <Link
+                                href="/profile"
+                                className="dropdown_link"
+                                onClick={() => setToggleDropDown(false)}
+                            >
+                                My Profile
+                            </Link>
+                            <Link
+                                href="/create_prompt"
+                                className="dropdown_link"
+                                onClick={() => setToggleDropDown(false)}
+                            >
+                                Create Prompt
+                            </Link>
+                            <button
+                                className="mt-5 w-full black_btn"
+                                type="button"
+                                onClick={() => {setToggleDropDown(false)
+                                signOut()}}
+                            >
+                                Sign Out
+                            </button>
+                        </div>
+                    )}
                 </div>
             ):( 
                 <>
