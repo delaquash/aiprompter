@@ -1,6 +1,8 @@
+import { connectedDB } from "@utils/database";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { ReactNode } from "react";
+
 
 interface OAuthConfig {
     session: ReactNode;
@@ -18,7 +20,16 @@ const handler =NextAuth({
 
     },
     async signIn ({ profile }: OAuthConfig) {
-        
+        try {
+           await connectedDB()
+        //    check if user exist
+           
+        // if user doesn't exist, create a new user
+           return true;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
     }
 })
 
