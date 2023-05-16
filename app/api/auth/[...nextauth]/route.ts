@@ -1,12 +1,16 @@
+import User from "@models/user";
 import { connectedDB } from "@utils/database";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { ReactNode } from "react";
 
-
 interface OAuthConfig {
     session: ReactNode;
     profile: string;
+}
+
+interface IProfile {
+    email: string;
 }
 
 const handler =NextAuth({
@@ -23,6 +27,9 @@ const handler =NextAuth({
         try {
            await connectedDB()
         //    check if user exist
+        const userExist = User.findOne({
+            email: profile.email
+        })
            
         // if user doesn't exist, create a new user
            return true;

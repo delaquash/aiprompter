@@ -23,5 +23,5 @@ const UserSchema= new Schema({
       }
     });
 
-    const User =models.User || model<ISChema>("User", UserSchema);
+    const User =models.User<ISChema> || model<ISChema>("User", UserSchema);
     export default User;
