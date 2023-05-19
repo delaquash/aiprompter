@@ -1,5 +1,5 @@
 "use client"
-import { getProviders, signIn, signOut } from "next-auth/react";
+import { getProviders, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -9,11 +9,16 @@ interface IProvider {
     name?: any;
 }
 const Nav = () => {
-    const isUserLoggedIn = true;
+    // const isUserLoggedIn = true;
+    const { data: session } = useSession()
 
     const [ providers, setProviders ]= useState<IProvider>()
     const [toggleDropDown, setToggleDropDown] = useState<boolean>(false)
     
+    const signOut = () => {
+        console.log(signOut);
+    }
+
     useEffect(()=> {
         const setProvider = async ()=> {
             const response:any = await getProviders();
@@ -36,7 +41,7 @@ const Nav = () => {
         </Link>
         {/* desktop nav */}
         <div className="sm:flex hidden">
-            {isUserLoggedIn ? (
+            {session?.user ? (
                 <div className="flex gap-3 md:gap-5">
                     <Link href="/create-prompt" className="black_btn">
                         Create Post
@@ -73,7 +78,7 @@ const Nav = () => {
 
         {/* mobile navigation */}
         <div className="relative flex sm:hidden">
-            {isUserLoggedIn ? (
+            {session?.user ? (
                 <div className="flex">
                     <Image
                         src="/assets/images/Emmanuel.jpg"

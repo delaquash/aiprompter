@@ -3,26 +3,27 @@ import User from "@models/user";
 import { connectedDB } from "@utils/database";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { ReactNode } from "react";
 
-interface OAuthConfig {
-    session: any;
-    token?: ReactNode;
-    user: string;
-    profile: IProfile;
-}
 
-interface IProfile {
-    picture: string;
-    email: string;
-    username: string;
-    image: string;
-    name: string
-    user?: string
-    account?:string;
-    profile?: string;  
-    credentials?:string;
-}
+
+// interface OAuthConfig {
+//     session: any;
+//     token?: ReactNode;
+//     user: string;
+//     profile: IProfile;
+// }
+
+// interface IProfile {
+//     picture: string;
+//     email: string;
+//     username: string;
+//     image: string;
+//     name: string
+//     user?: string
+//     account?:string;
+//     profile?: string;  
+//     credentials?:string;
+// }
 
 const handler =NextAuth({
     providers: [
@@ -31,8 +32,8 @@ const handler =NextAuth({
             clientSecret: "process.env.CLIENT_SECRET"
         })
     ],
-    // callbacks: {
-        async session ({ session }: OAuthConfig) {
+    callbacks: {
+        async session ({ session }: any) {
             const sessionUser = await User.findOne({
                 email: session?.user?.email
             })
@@ -40,7 +41,7 @@ const handler =NextAuth({
             session.user.id= sessionUser._id.toString();
             return session;
         },
-        async signIn ({ profile }: OAuthConfig) {
+        async signIn ({ profile }: any) {
             try {
                await connectedDB()
             //    check if user exist
@@ -65,7 +66,7 @@ const handler =NextAuth({
                 console.log(error);
                 return false;
             }
-        // }
+        }
     }
 })
 
