@@ -11,18 +11,16 @@ interface IProvider {
 const Nav = () => {
     // const isUserLoggedIn = true;
     const { data: session } = useSession()
-
-    const [ providers, setProviders ]= useState<IProvider>()
+    const [ providers, setProviders ]= useState()
     const [toggleDropDown, setToggleDropDown] = useState<boolean>(false)
-    
-    const signOut = () => {
-        console.log(signOut);
-    }
+
 
     useEffect(()=> {
         const setProvider = async ()=> {
             const response:any = await getProviders();
             setProviders(response)
+            console.log(response);
+            
         }
         setProvider()
     }, [])
@@ -41,17 +39,17 @@ const Nav = () => {
         </Link>
         {/* desktop nav */}
         <div className="sm:flex hidden">
-            {session?.user ? (
+            {session?.user? (
                 <div className="flex gap-3 md:gap-5">
                     <Link href="/create-prompt" className="black_btn">
                         Create Post
                     </Link>
-                    <button type="button" onClick={signOut} className="outline_btn">
+                    <button type="button" onClick={()=> signOut()} className="outline_btn">
                         Sign Out
                     </button>
                     <Link href="/profile">
                         <Image
-                            src="/assets/images/Emmanuel.jpg"
+                            src="/assets/images/logo.svg"
                             height={37}
                             width={37}
                             alt="Profile"
@@ -61,7 +59,7 @@ const Nav = () => {
             ): (
                 <>
                     {providers && 
-                        Object.values(providers).map((provider)=>(
+                        Object.values(providers).map((provider: any)=>(
                             <button
                                 type="button"
                                 key={provider.name}
@@ -81,7 +79,7 @@ const Nav = () => {
             {session?.user ? (
                 <div className="flex">
                     <Image
-                        src="/assets/images/Emmanuel.jpg"
+                        src="/assets/images/logo.svg"
                         height={37}
                         width={37}
                         alt="Profile"
@@ -98,7 +96,7 @@ const Nav = () => {
                                 My Profile
                             </Link>
                             <Link
-                                href="/create_prompt"
+                                href="/create-prompt"
                                 className="dropdown_link"
                                 onClick={() => setToggleDropDown(false)}
                             >
@@ -118,7 +116,7 @@ const Nav = () => {
             ):( 
                 <>
                      {providers && 
-                        Object.values(providers).map((provider)=>(
+                        Object.values(providers).map((provider: any)=>(
                             <button
                                 type="button"
                                 key={provider.name}

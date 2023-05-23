@@ -1,9 +1,9 @@
 import { Schema, model, models } from "mongoose"
-
 interface ISChema {
     email: string;
     username: string;
     image: string;
+    // _id: number
 }
 
 const UserSchema= new Schema({
@@ -20,7 +20,10 @@ const UserSchema= new Schema({
 
     image: {
         type: String,
-      }
+      }, 
+    //   _id: {
+    //     type: Number,
+    //   }
     });
 
     const User =models.User<ISChema> || model<ISChema>("User", UserSchema);

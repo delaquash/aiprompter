@@ -1,43 +1,23 @@
 
+process.env.NODE_NO_WARNINGS = 'stream/web';
 import User from "@models/user";
 import { connectedDB } from "@utils/database";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-
-
-// interface OAuthConfig {
-//     session: any;
-//     token?: ReactNode;
-//     user: string;
-//     profile: IProfile;
-// }
-
-// interface IProfile {
-//     picture: string;
-//     email: string;
-//     username: string;
-//     image: string;
-//     name: string
-//     user?: string
-//     account?:string;
-//     profile?: string;  
-//     credentials?:string;
-// }
-
 const handler =NextAuth({
     providers: [
         GoogleProvider({
-            clientId: "process.env.CLIENT_ID",
-            clientSecret: "process.env.CLIENT_SECRET"
+            clientId: "273571730540-vqihqjgqqlaq4pc5ke9ifgm8g20n2a10.apps.googleusercontent.com",
+            clientSecret: "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"
         })
     ],
     callbacks: {
         async session ({ session }: any) {
             const sessionUser = await User.findOne({
-                email: session?.user?.email
+                email: session.user.email
             })
-
+            // console.log(sessionUser);
             session.user.id= sessionUser._id.toString();
             return session;
         },
