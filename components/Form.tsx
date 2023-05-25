@@ -19,9 +19,17 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }: IProps) => {
           and let your imagination run wild with any AI powered platform</p>
           <form
             onSubmit={handleSubmit}
-            
+            className='mt-10 w-full flex flex-col gap-7 glassmorphism max-w-2xl'
           >
+            <label>
+              <span className='font-satoshi font-semibold text-base text-gray-700'>Your AI Prompt </span>
+                <textarea 
+                    value={post.prompt}
+                    onChange={(e) => setPost({...post, prompt: e.target.value})}
 
+                />
+
+            </label>
           </form>
     </section>
   )

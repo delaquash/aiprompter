@@ -16,7 +16,7 @@ const CreatePrompt = () => {
     tag: "",
   })
 
-  const createPrompt = async (e: { preventDefault: () => void  }) => {
+  const createPrompt = async (e: React.FormEvent) => {
     e.preventDefault();
   }
 
