@@ -1,4 +1,6 @@
+"use client";
 import { IPost } from '@app/create-prompt/page';
+import Link from 'next/link';
 import React, { Dispatch, SetStateAction } from 'react';
 
 interface IProps {
@@ -9,12 +11,17 @@ interface IProps {
   handleSubmit?: React.MouseEventHandler
 }
 
+function setPost(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+
 const handleOnchange = (e: { target: { value: string; }}) => {
   setPost({...post, prompt: e.target.value})
 }
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }: IProps) => {
   return (
+    <>
     <section className='w-full max-w-full flex-start flex-col'>
       <h1 className="text-left head_text">
         <span className="blue_gradient">{type} Post</span>
@@ -34,17 +41,43 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }: IProps) => {
                     onChange={handleOnchange}
                     placeholder='Write Your Prompt Here...'
                     required
-                    className='form_input'
+                    className=' form_textarea'
                 />
             </label>
-          
+            <label>
+                <span className='font-satoshi font-semibold text-base text-gray-700'>
+                  Tag
+                  {` `}
+                  <span className='font_normal'>
+                    (#product, #webdev #flutter #mvp #nextjs)
+                  </span>
+                </span>
+                  <textarea 
+                      value={post.tag}
+                      onChange={handleOnchange}
+                      placeholder='#tag'
+                      required
+                      className='form_input'
+                  />
+            </label>
+            <div className="flex-end mx-3 mb-5 gap-4">
+              <Link href="/" className='text-gray-500 text-sm'>
+                Cancel
+              </Link>
+              <button 
+                type='submit' 
+                disabled={submitting}
+                className='px-5 py-1.5 text-sm rounded-full text-white bg-orange-400'
+              >
+                  {submitting ? `${type}...` : type}
+              </button>
+            </div>
           </form>
     </section>
+    </>
   )
 }
 
 export default Form
 
-// function setPost(arg0: any) {
-//   throw new Error('Function not implemented.');
-// }
+
