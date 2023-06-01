@@ -1,9 +1,9 @@
 "use client";
 import Form from "@components/Form";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
 
 export interface IPost {
   prompt: string;
@@ -12,8 +12,9 @@ export interface IPost {
 
 const CreatePrompt = () => {
   const router =  useRouter()
+  const { data: session } = useSession()
   const [submitting, setSubmitting] = useState<boolean>(false);
-  const [post, setPost] = useState<IPost>({
+  const [post, setPost] = useState<IPost | any >({
     prompt: "",
     tag: "",
   })
@@ -26,10 +27,10 @@ const CreatePrompt = () => {
         body: JSON.stringify({
           prompt: post.prompt,
           tag: post.tag,
-          userId: session?.user.id
+          userId: session?.user?.id
         })
       })
-      if(res.ok){
+      if(res.statusText === "OK"){
         router.push("/")
       }
     } catch (error) {
@@ -53,4 +54,4 @@ const CreatePrompt = () => {
   )
 }
 
-export default CreatePrompt
+export default CreatePrompt;

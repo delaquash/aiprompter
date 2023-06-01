@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth from "next-auth";
 
 declare module "NextAuth" {
   export interface User {
@@ -13,3 +13,10 @@ declare module "NextAuth" {
   }
 }
 
+export default NextAuth({
+  callbacks: {
+    session({ session, token, user, id}) {
+      return session // The return type will match the one returned in `useSession()`
+    },
+  },
+})
