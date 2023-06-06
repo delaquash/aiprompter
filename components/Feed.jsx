@@ -2,8 +2,21 @@
 import { useEffect, useState } from "react";
 // import PromptCardList from "./PromptCardList";
 import axios from "axios";
+import PromptCard from "./PromptCard";
 
-
+const PromptCardList = ({ data, handleTagClick}) => {
+  return (
+    <div className="m-16 prompt_layout">
+        {data.map((post)=> {
+          <PromptCard 
+              key={post._id}
+              post={post}
+              handleTagClick={handleTagClick}
+          />
+        })}
+    </div>
+  )
+}
 
 const Feed = () => {
   const [searchText, setSearchText] = useState();
@@ -35,7 +48,7 @@ const Feed = () => {
           />
         </form>
         <PromptCardList 
-          data={[post]}
+          datas={post}
           handleTagClick={()=>{}}
         />
     </section>
