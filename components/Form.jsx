@@ -1,25 +1,14 @@
 "use client";
-import { IPost } from '@app/create-prompt/page';
+
 import Link from 'next/link';
 import React, { Dispatch, SetStateAction } from 'react';
 
-interface IProps {
-  type: string;
-  post: IPost;
-  setPost?: Dispatch<SetStateAction<string>>;
-  submitting: boolean;
-  handleSubmit?: React.MouseEventHandler
-}
 
-function setPost(arg0: any) {
-  throw new Error('Function not implemented.');
-}
-
-const handleOnchange = (e: { target: { value: string; }}) => {
+const handleOnchange = (e) => {
   setPost({...post, prompt: e.target.value})
 }
 
-const Form = ({ type, post, setPost, submitting, handleSubmit }: IProps) => {
+const Form = ({ type, post, setPost, submitting, handleSubmit } ) => {
   return (
     <>
     <section className='w-full max-w-full flex-start flex-col'>

@@ -4,20 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-interface IProvider {
-    id?: any ;
-    name?: any;
-}
+
 const Nav = () => {
     // const isUserLoggedIn = true;
     const { data: session } = useSession()
     const [ providers, setProviders ]= useState()
-    const [toggleDropDown, setToggleDropDown] = useState<boolean>(false)
+    const [toggleDropDown, setToggleDropDown] = useState(false)
 
 
     useEffect(()=> {
         const setProvider = async ()=> {
-            const response:any = await getProviders();
+            const response= await getProviders();
             setProviders(response)
             console.log(response);
             
@@ -59,7 +56,7 @@ const Nav = () => {
             ): (
                 <>
                     {providers && 
-                        Object.values(providers).map((provider: any)=>(
+                        Object.values(providers).map((provider)=>(
                             <button
                                 type="button"
                                 key={provider.name}
@@ -116,7 +113,7 @@ const Nav = () => {
             ):( 
                 <>
                      {providers && 
-                        Object.values(providers).map((provider: any)=>(
+                        Object.values(providers).map((provider)=>(
                             <button
                                 type="button"
                                 key={provider.name}

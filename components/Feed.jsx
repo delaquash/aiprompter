@@ -1,14 +1,27 @@
 "use client"
+import { useEffect, useState } from "react";
+// import PromptCardList from "./PromptCardList";
+import axios from "axios";
 
-import { useState } from "react";
-import PromptCard from "./PromptCard";
 
 
 const Feed = () => {
-  const [searchText, setSearchText] = useState()
+  const [searchText, setSearchText] = useState();
+  const [post, setPost] = useState([])
   const handleFormChange =() => {
 
   }
+
+
+  useEffect(()=> {
+    const fetchPosts = async () => {
+      const response = await axios("api/prompt");
+      const data = response.json();
+      setPost(data)
+    }
+    fetchPosts()
+  },[])
+
   return (
     <section className="feed">
         <form  className="flex-center relative w-full">
@@ -22,7 +35,7 @@ const Feed = () => {
           />
         </form>
         <PromptCardList 
-          data={[]}
+          data={[post]}
           handleTagClick={()=>{}}
         />
     </section>
