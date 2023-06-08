@@ -1,8 +1,8 @@
 "use client"
 import { useEffect, useState } from "react";
-// import PromptCardList from "./PromptCardList";
 import axios from "axios";
 import PromptCard from "./PromptCard";
+import { Session } from "inspector";
 
 const PromptCardList = ({ data, handleTagClick}) => {
   return (
@@ -25,14 +25,14 @@ const Feed = () => {
 
   }
 
-
   useEffect(()=> {
     const fetchPosts = async () => {
       const response = await axios("api/prompt");
-      const data = response.json();
+      const data = await response.json();
       setPost(data)
     }
-    fetchPosts()
+
+     fetchPosts()
   },[])
 
   return (
