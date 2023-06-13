@@ -1,7 +1,10 @@
-// "use client"
-import Nav from "@components/Nav";
-import Provider from "@components/Provider";
+"use client";
+import Footer from "@components/Footer";
+import Navbar from "@components/Navbar";
 import "@styles/globals.css";
+interface INodes {
+    children: React.ReactNode
+}
 
 interface IMetadata {
     title: string;
@@ -9,31 +12,18 @@ interface IMetadata {
 }
 
 export const metadata:IMetadata ={
-    title: "Aipropmtia",
-    description: "Discover and share AI prompts"
+    title: "Car Hub",
+    description: "Discover world's best car showcase application",
 }
 
-type LayoutProps = {
-    children: React.ReactNode,
-  };
-
-const RootLayout = ({ children }:LayoutProps) => {
-    return (
-        <html lang="en">
-            <body>
-                <Provider>
-                    <div className="main">
-                    <div className="gradient"/>
-                </div>
-                <main className="app">
-                    <Nav />
-                    {children}
-                </main>
-                </Provider>
-                
-            </body>
-        </html>
-    )
-}
+const RootLayout = ({ children }: INodes) => (
+    <html lang="en">
+        <body className="relative">
+            <Navbar />
+             {children}
+            <Footer />
+        </body>
+    </html>
+)
 
 export default RootLayout
