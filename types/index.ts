@@ -32,3 +32,7 @@ export interface ICarData {
     year: number
     message: string
 }
+
+export interface ICarCard {
+     car: ICarData
+}
