@@ -16,3 +16,19 @@ export interface ICustomFilter {
     title: string;
     titles: (title: string) => void
 }
+
+export interface ICarData {
+    city_mpg: number
+    class: string
+    combination_mpg: string
+    cylinders: number
+    displacement: number
+    drive: string
+    fuel_type: string
+    highway_mpg: number;
+    make: string
+    model: string
+    transmission: string
+    year: number
+    message: string
+}

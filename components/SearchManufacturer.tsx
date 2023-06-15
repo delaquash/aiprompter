@@ -41,7 +41,6 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: ISearchbarProps) 
           </Combobox.Button>
 
           {/* Input field for searching */}
-
           <Combobox.Input 
               className="search-manufacturer__input"
               placeholder="Volkswagen"

@@ -2,6 +2,8 @@
 import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
 import "@styles/globals.css";
+import Providers from "@utils/Provider";
+
 interface INodes {
     children: React.ReactNode
 }
@@ -19,9 +21,12 @@ export const metadata:IMetadata ={
 const RootLayout = ({ children }: INodes) => (
     <html lang="en">
         <body className="relative">
-            <Navbar />
-             {children}
-            <Footer />
+            {/* <!-- Preloader --> */}
+            <Providers>
+                <Navbar />
+                    {children}
+                <Footer />
+            </Providers>
         </body>
     </html>
 )
