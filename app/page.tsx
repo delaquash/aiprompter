@@ -15,8 +15,12 @@ const Home = () => {
         <div className="home__filters">
           <Searchbar />
           <div className="home__filter-container">
-            <CustomFilter title="fuel" />
-            <CustomFilter title="year" />
+            <CustomFilter title="fuel" titles={function (title: string): void {
+              throw new Error("Function not implemented.");
+            } } />
+            <CustomFilter title="year" titles={function (title: string): void {
+              throw new Error("Function not implemented.");
+            } } />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
+import { ICustomFilter } from "../types/index"
 
-
-const CustomFilter = () => {
+const CustomFilter = ({ title, titles }: ICustomFilter) => {
   return (
     <div>CustomFilter</div>
   )

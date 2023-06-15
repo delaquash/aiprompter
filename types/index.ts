@@ -11,3 +11,8 @@ export interface ISearchbarProps {
     manufacturer: string;
     setManufacturer: (manufacturer: string)=> void;
 }
+
+export interface ICustomFilter {
+    title: string;
+    titles: (title: string) => void
+}
