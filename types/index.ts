@@ -3,8 +3,11 @@ import { MouseEventHandler } from "react";
 export interface ICustomButtonProps {
     title: string;
     containerStyles?: string;
+    rightIcon?: string;
+    textStyle?: string;
     handleClick?: MouseEventHandler<HTMLButtonElement>;
     btnType? : "button" | "submit";
+    isDisabled?: boolean
 }
 
 export interface ISearchbarProps {
@@ -17,6 +20,8 @@ export interface ICustomFilter {
     titles: (title: string) => void
 }
 
+
+// Same name as carProps
 export interface ICarData {
     city_mpg: number
     class: string
@@ -35,4 +40,10 @@ export interface ICarData {
 
 export interface ICarCard {
      car: ICarData
+}
+
+export interface CarDetailsProps {
+   isOpen: boolean;
+   car: ICarData;
+   closeModal: () => void 
 }
