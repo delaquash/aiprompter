@@ -2,11 +2,11 @@
 import { CustomFilter, Hero, Searchbar } from "@components";
 import CarCard from "@components/CarCard";
 import { fetchCars } from "@utils";
-import { useQuery } from "react-query";
 
 
 const Home = async () => {
   const data = await fetchCars()
+  // console.log(data)
   /* `const carData` is a boolean variable that checks 
   if the `data` variable is empty or not. 
   It checks if `data` is not an array, 
@@ -28,10 +28,10 @@ const Home = async () => {
             <CustomFilter title="fuel"  />
             <CustomFilter title="year"  />
 
-            {carData ? (
+            {!carData ? (
               <section>
                 <div className="home__cars-wrapper">
-                    {data?.map((car)=> (
+                    {data.map((car)=> (
                       <CarCard car={car} />
                     ))}
                 </div>
@@ -41,7 +41,7 @@ const Home = async () => {
                 <h2 className="text-black text-xl font-bold">
                   Oop's no result found. Please check back later.
                 </h2>
-                <p>{data?.message}</p>
+                {/* <p>{data?.message}</p> */}
               </div>
             )}
           </div>
