@@ -6,8 +6,6 @@ import { calculateCarRent, generateCarImageUrl } from '@utils';
 import Image from 'next/image';
 import CarDetails from './CarDetails';
 
-
-
 const CarCard = ({ car }: ICarCard) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const { city_mpg, year, make, model, transmission, drive } = car;
