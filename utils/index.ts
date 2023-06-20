@@ -1,14 +1,16 @@
-import { ICarData } from '@types';
+import { FilterProps, ICarData } from '@types';
 import axios from 'axios';
-// import { CarProps, FilterProps } from "@types";
 
-export const fetchCars = async () => {
+export const fetchCars = async (filters: FilterProps ) => {
+    const { fuel, year, model, manufacturer, limit } = filters;
     const headers = {
         'X-RapidAPI-Key': 'b286648626mshb5a701605ade81bp154604jsncf5b4b6ff8f6',
         'X-RapidAPI-Host': 'cars-by-api-ninjas.p.rapidapi.com'
     }
 
-    const res = await axios.get('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=carrera', {
+    const res = await axios.get(`https://cars-by-api-ninjas.p.rapidapi.com
+        /v1/cars?make=${manufacturer}&year=${year}
+        &model=${model}&limit=${limit}&fuel_type=${fuel}`, {
         headers: headers     
     })
     const resdata = (await res.data) as ICarData[];

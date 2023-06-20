@@ -15,9 +15,14 @@ export interface ISearchbarProps {
     setManufacturer: (manufacturer: string)=> void;
 }
 
+export interface OptionProps {
+    title: string;
+    value: string;
+}
+
 export interface ICustomFilter {
     title: string;
-    titles: (title: string) => void
+    options: OptionProps[];
 }
 
 
@@ -46,4 +51,12 @@ export interface CarDetailsProps {
    isOpen: boolean;
    car: ICarData;
    closeModal: () => void 
+}
+
+export interface FilterProps{
+    manufacturer: string;
+    model: string;
+    year: number;
+    fuel: string;
+    limit: number;
 }

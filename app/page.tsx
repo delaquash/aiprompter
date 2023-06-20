@@ -1,11 +1,18 @@
 // "use client";
 import { CustomFilter, Hero, Searchbar } from "@components";
 import CarCard from "@components/CarCard";
+import { yearsOfProduction, fuels } from "@constants";
 import { fetchCars } from "@utils";
 
 
-const Home = async () => {
-  const data = await fetchCars()
+const Home = async ({ searchParams }) => {
+  const data = await fetchCars({
+    manufacturer: searchParams.manufacturer || "",
+    year: searchParams.year || 2022,
+    fuel: searchParams.fuel || "",
+    limit: searchParams.limit || 10,
+    model: searchParams.model || ""
+  })
   // console.log(data)
   /* `const carData` is a boolean variable that checks 
   if the `data` variable is empty or not. 
@@ -25,8 +32,8 @@ const Home = async () => {
         <div className="home__filters">
           <Searchbar />
           <div className="home__filter-container">
-            <CustomFilter title="fuel"  />
-            <CustomFilter title="year"  />
+            <CustomFilter title="fuel" options={fuels} />
+            <CustomFilter title="year"  options={yearsOfProduction} />
 
             {!carData ? (
               <section>
