@@ -13,7 +13,7 @@ export const fetchCars = async (filters: FilterProps ) => {
         &model=${model}&limit=${limit}&fuel_type=${fuel}`, {
         headers: headers     
     })
-    const resdata = (await res.data) as ICarData[];
+    const resdata = (await res.data) 
     return resdata
 }
 
