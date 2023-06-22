@@ -11,8 +11,8 @@ export interface ICustomButtonProps {
 }
 
 export interface ISearchbarProps {
-    manufacturer: string;
-    setManufacturer: (manufacturer: string)=> void;
+    selected: string;
+    setSelected: (manufacturer: string)=> void;
 }
 
 export interface OptionProps {

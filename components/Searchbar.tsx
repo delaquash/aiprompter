@@ -17,58 +17,29 @@ const SearchButton = ({ otherClasses }: {otherClasses : string}) => (
   </button>
 )
 
-const Searchbar = () => {
-  const [manufacturer, setManufacturer] = useState("")
-  const [model, setModel] = useState("");
+const Searchbar = ({ setManufacturer, setModel }) => {
+  const [searchManufacturer, setSearchManufacturer] = useState("")
+  const [searchModel, setSearchModel] = useState("");
   const router = useRouter();
 
   const handleSearch=(e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if( manufacturer === "" && model === "" ){
+      if( searchManufacturer === "" && searchModel === "" ){
         return alert("Please fill in the search bar...")
       }
 
-      updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase())
+      setModel(searchModel)
+      setManufacturer(searchManufacturer)
   }
 
-  const updateSearchParams = ( model: string, manufacturer: string) => {
-
-      /* `const searchParams = new URLSearchParams(window.location.search)` 
-      is creating a new instance of the URLSearchParams object with the current 
-      URL's query string as its input. This allows the code to manipulate the 
-      query string parameters, such as adding or deleting them. */
-
-      const searchParams = new URLSearchParams(window.location.search)
-      
-
-      if(model){
-        searchParams.set('model', model);
-      } else {
-        searchParams.delete('model');
-      }
-
-      if(manufacturer){
-        searchParams.set('manufacturer', manufacturer);
-      } else {
-        searchParams.delete('manufacturer');
-      }
-
-      /* `const newPathName = `${window.location.pathname} ? ${searchParams.toString()}`` is creating a
-      new path name by combining the current path name with the updated query string parameters. The
-      `window.location.pathname` returns the current path name, and `searchParams.toString()`
-      returns the updated query string parameters as a string. The resulting string is then assigned
-      to the `newPathName` variable, which is used to update the URL using the `router.push()`
-      method. */
-      const newPathName = `${window.location.pathname} ? ${searchParams.toString()}`
-      router.push(newPathName)
-  }
+  
   return (
     <form onClick={handleSearch} className="searchbar">
       <div className="searchbar__item">
         <SearchManufacturer 
-            manufacturer={manufacturer}
-            setManufacturer={setManufacturer}
+            selected={searchManufacturer}
+            setSelected={setSearchManufacturer}
         />
         <SearchButton  otherClasses="sm:hidden" />
       </div>
@@ -83,8 +54,8 @@ const Searchbar = () => {
           <input 
               type="text"
               placeholder="Model name or number..."
-              value={model}
-              onChange={(e)=>setModel(e.target.value)}
+              value={searchModel}
+              onChange={(e)=>setSearchModel(e.target.value)}
               name="model"
               className="searchbar__input"
           />
